@@ -1,0 +1,98 @@
+#!/bin/zsh
+
+# Create a repository on GitHub and clone it locally
+# Follow prompts and clone
+# gh repo create
+
+GITHUB_ORG=$(gum input --placeholder "What is the name of your GitHub org?")
+
+# Ask for repository name
+REPO_NAME=$(gum input --placeholder "What is the name of the repo you just created?")
+
+# CD into repository folder
+cd $REPO_NAME
+
+# Get working directory
+echo "Your current working directory has been changed to: $(pwd)"
+
+# set node version for project
+touch .nvmrc
+
+# Ask for node version of the project
+NODE_VERSION=$(gum input --placeholder "What version of node would you like to use? (eg: v16)")
+
+# append node version to .nvmrc
+echo $NODE_VERSION > .nvmrc
+# reload .zshrc to load correct node version
+source ~/.zshrc
+# install yarn
+npm add -g yarn
+# init npm (choose defaults, add description, mark as private)
+yarn init
+# install lerna at workspace root
+yarn add lerna -W
+# Initialize lerna using packages workspace
+lerna init --packages="packages/*"
+
+# EDIT LERNA CONFIG TO PUBLISH TO GITHUB PACKAGE REGISTRY
+zsh ../edit-lerna-json-with-jq.zsh
+# Create file with new lerna config
+# cat > lerna-release-config.json <<'EOF'
+# {
+#     "publish": {
+#       "conventionalCommits": true,
+#       "message": "chore(release): publish",
+#       "registry": "https://npm.pkg.github.com",
+#       "allowBranch": "master"
+#     }
+# }
+# EOF
+
+# Make edit-json.js file in helpers
+# mkdir -p helpers && touch helpers/edit-json.js
+
+# Write a script to edit-json.js to help edit key:value pairs in json config files
+# cat > helpers/edit-json.js <<'EOF'
+# var fs = require("fs");
+
+# // process variables
+# var file = process.argv[2];
+# var type = process.argv[3];
+# var key = process.argv[4];
+# var value = process.argv[5];
+
+# //Read json data to be updated
+# var json = require(`${__dirname}/../${file}`);
+
+# // Read the json value from a file
+# var val = require(`${__dirname}/../${value}`);
+
+# // Add a key:value pair to json data
+# if (type === "add") {
+#   json[key] = val;
+# }
+
+# // Write updated json to file
+# fs.writeFile(
+#   `${__dirname}/../${file}`,
+#   JSON.stringify(json),
+#   "utf8",
+#   function (err, data) {
+#     // console.log(data)
+#     if (err) {
+#       console.log(err);
+#       return;
+#     } else {
+#       console.log("json updated");
+#     }
+#   }
+# );
+# EOF
+
+# Call edit-json with file:lerna.json, type:add, key:command, value: lerna-release-config.json
+# node ./helpers/edit-json.js lerna.json add command lerna-release-config.json
+# Delete lerna config json
+# rm lerna-release-config.json
+
+# ADD PACKAGES USING LERNA
+zsh ../add-packages-with-lerna.zsh $GITHUB_ORG

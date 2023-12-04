@@ -1,0 +1,10 @@
+{
+  "org_name": "smerth",
+  "repo_name": "new-project",
+  "node_version": "v18",
+  "packages": [
+    "@smerth/concord",
+    "@smerth/fullopia"
+  ],
+  "apps": []
+}

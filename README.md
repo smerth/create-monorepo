@@ -4,7 +4,19 @@
 
 A Gum/Shell CLI to create a Node/Lerna/Yarn monorepo with two demo packages ready to publish.
 
+The build process modifies the steps outlined in the nice summary article: [publishing and installing private github packages using yarn and lerna](https://viewsource.io/publishing-and-installing-private-github-packages-using-yarn-and-lerna/)
+
 ## Requirements
+
+yarn add -g lerna
+
+jq
+
+gum
+
+nvm
+
+node
 
 ### Node setup
 

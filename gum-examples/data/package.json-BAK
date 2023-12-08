@@ -1,0 +1,13 @@
+{
+  "org_name": "smerth",
+  "repo_name": "gong",
+  "node_version": "v18",
+  "packages": [
+    "@smerth/concord",
+    "@smerth/epicorn"
+  ],
+  "apps": [
+    "NEXT",
+    "GATSBY"
+  ]
+}

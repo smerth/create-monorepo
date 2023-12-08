@@ -1,25 +1,16 @@
-#!/bin/sh
+#!/bin/zsh
 
+SCRIPT_DIR=$(dirname "$0")
+
+# Collect args
 TEXT=("$@")
 
-export GUM_INPUT_CURSOR_FOREGROUND="#0000ff"
-export GUM_INPUT_PROMPT_FOREGROUND="#0000ff"
-export GUM_INPUT_PROMPT="> "
-export GUM_INPUT_WIDTH=80
-
-
-WHITE="ffffff"
-BLUE="#0000ff"
-AQUA="#4cd6f1"
-
-
-# --foreground is the text
-# --border-foreground is the border itself
+# Colors
+source $SCRIPT_DIR/../gum-ui/colors.zsh
 
 gum style \
-	--background $BLUE --border-background $BLUE \
-    --foreground $WHITE \
-    --border-foreground $AQUA --border double \
-	--align center --width 50 \
-    --margin "1 2" --padding "0 0" \
+    --border normal \
+    --margin "1" \
+    --padding "2 2" \
+    --border-foreground $WHITE \
     $TEXT

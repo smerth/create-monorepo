@@ -43,7 +43,7 @@ sleep 1
 
 CHOICE=$(gum choose --item.foreground 250 "Yes" "No" "It's complicated")
 
-[[ "$CHOICE" == "Yes" ]] && echo "I thought so, $(gum style --bold "Bubble Gum") is the best." || echo "I'm sorry to hear that."
+[[ "$CHOICE" == "Yes" ]] && echo "I thought so, $(gum style "Bubble Gum") is the best." || echo "I'm sorry to hear that."
 
 sleep 1
 

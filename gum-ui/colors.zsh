@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+RED=#ff1919
+BLUE=#3232ff
+PINK=#cf118b
+GREEN=#27d128
+WHITE=#ffffff
+ORANGE=#FFA500

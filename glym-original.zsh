@@ -25,7 +25,7 @@ NODE_VERSION=$(gum input --placeholder "What version of node would you like to u
 
 # CD INTO THE REPOSITORY FOLDER
 if ! cd $REPO_NAME; then
-    echo "$(gum style --foreground $ORANGE --bold "X ERROR!") Unable to CD into the provided project folder."
+    echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to CD into the provided project folder."
     exit 1
 fi
 

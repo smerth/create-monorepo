@@ -6,10 +6,7 @@ SCRIPT_DIR=$(dirname "$0")
 # GITHUB_ORG=$1
 
 # COLORS
-PINK=#cf118b
-GREEN=#27d128
-WHITE=#ffffff
-ORANGE=#FFA500
+source $SCRIPT_DIR/../gum-ui/colors.zsh
 
 # ADD APPS
 TEXT=("ADD APPS TO THE MONOREPO")
@@ -22,7 +19,7 @@ zsh $SCRIPT_DIR/../gum-ui/text.zsh $TEXT banner
 # CHOOSE WHETHER TO ADD AN APP
 YES="Yes, please!"
 NO="No."
-echo "$(gum style --foreground $GREEN --bold "?") Do you want to add an app?"
+echo "$(gum style --foreground $GREEN "?") Do you want to add an app?"
 INSTALL_APP_CHOICE=$(gum choose "$YES" "$NO")
 echo $INSTALL_APP_CHOICE
 
@@ -32,7 +29,7 @@ REMIX="Remix"
 GATSBY="Gatsby"
 EXPO="Expo"
 
-echo "$(gum style --foreground $GREEN --bold "?") Which app would you like to install?"
+echo "$(gum style --foreground $GREEN "?") Which app would you like to install?"
 APP_TYPE_CHOICE=$(gum choose "$NEXT" "$REMIX" "$GATSBY" "$EXPO")
 echo $APP_TYPE_CHOICE
 
@@ -42,10 +39,10 @@ if [ "$INSTALL_APP_CHOICE" = "$YES" ]; then
     PACKAGE_JSON_FILE=package.json
     # TODO: should append workspaces array not write over it
     if ! jq '.workspaces=["packages/*", "apps/*"]' $PACKAGE_JSON_FILE >temp_data.json; then
-        echo "$(gum style --foreground $ORANGE --bold "X ERROR!") It looks like there was a problem adding apps/* to workspaces key to package.json"
+        echo "$(gum style --foreground $ORANGE "X ERROR!") It looks like there was a problem adding apps/* to workspaces key to package.json"
         exit 1
     else
-        echo "$(gum style --foreground $GREEN --bold "✓ Success!") Added 'apps/*' to .workspaces key in package.json"
+        echo "$(gum style --foreground $GREEN "✓ Success!") Added 'apps/*' to .workspaces key in package.json"
     fi
     # Overwrite original JSON file
     mv temp_data.json $PACKAGE_JSON_FILE
@@ -84,11 +81,11 @@ if [ "$INSTALL_APP_CHOICE" = "$YES" ]; then
         # npx create-expo-app
     fi
     # ASK FOR ANOTHER APP INSTALL
-    echo "$(gum style --foreground $GREEN --bold "?") Do you want to add another app?"
+    echo "$(gum style --foreground $GREEN "?") Do you want to add another app?"
     INSTALL_APP_CHOICE=$(gum choose "$YES" "$NO")
 fi
 
 # COMMIT CHANGES
 # git add . && git commit -m "Created projects with lerna create"  && git push
 
-# echo "$(gum style --foreground $GREEN --bold "✓ Success!") Changes are committed and pushed."
+# echo "$(gum style --foreground $GREEN  "✓ Success!") Changes are committed and pushed."

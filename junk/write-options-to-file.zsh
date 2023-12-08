@@ -8,15 +8,15 @@ WHITE=#ffffff
 ORANGE=#FFA500
 
 # Ask for repository name
-echo "$(gum style --foreground $GREEN --bold "?") What is the name of the repo you just created?"
+echo "$(gum style --foreground $GREEN "?") What is the name of the repo you just created?"
 REPO_NAME=$(gum input --placeholder "my-new-project")
 echo $REPO_NAME
 # Ask for GitHub Org name
-echo "$(gum style --foreground $GREEN --bold "?") What is the name of your GitHub Org?"
+echo "$(gum style --foreground $GREEN "?") What is the name of your GitHub Org?"
 ORG_NAME=$(gum input --placeholder "supercoder")
 echo $ORG_NAME
 # Ask for Node version of the project
-echo "$(gum style --foreground $GREEN --bold "?") What version of node will your monorepo use?"
+echo "$(gum style --foreground $GREEN "?") What version of node will your monorepo use?"
 NODE_VERSION=$(gum input --placeholder "v18")
 echo $NODE_VERSION
 
@@ -26,7 +26,7 @@ PACKAGE_NAMES=()
 json='[]'
 
 # Collect names from user
-echo "$(gum style --foreground $GREEN --bold "?") Do you want to add packges to your monorepo?"
+echo "$(gum style --foreground $GREEN "?") Do you want to add packges to your monorepo?"
 gum confirm
 # As long as the user enters yes
 while [ $? -eq 0 ]; do
@@ -38,7 +38,7 @@ while [ $? -eq 0 ]; do
     # Add name to array of names
     PACKAGE_NAMES+=("${PACKAGE_NAME}")
     # Ask for another package name
-    echo "$(gum style --foreground $GREEN --bold "?") Do you want to add another packge to your monorepo?"
+    echo "$(gum style --foreground $GREEN "?") Do you want to add another packge to your monorepo?"
     gum confirm
 done
 

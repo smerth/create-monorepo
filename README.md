@@ -41,7 +41,7 @@ brew install gum
 ### Copy script to local folder
 
 ```shell
-git clone https://github.com/smerth/glym.git
+git clone https://github.com/smerth/create-monorepo.git
 ```
 
 ### Add path to the script to the $PATH variable
@@ -51,7 +51,7 @@ Check path to the script with `pwd`
 Add the path in `.zprofile`
 
 ```shell
-echo "export PATH=$PATH:/Users/smerth/Developer/shell-scripts/glym" >> ~/.zprofile && source ~/.zprofile
+echo "export PATH=$PATH:/Users/smerth/Developer/shell-scripts/create-monorepo" >> ~/.zprofile && source ~/.zprofile
 ```
 
 ### Add an alias for the script
@@ -59,7 +59,7 @@ echo "export PATH=$PATH:/Users/smerth/Developer/shell-scripts/glym" >> ~/.zprofi
 Append an alias for the script to `.zprofile`
 
 ```shel
-echo 'alias glym="glym.zsh"' >> ~/.zprofile && source ~/.zprofile
+echo 'alias cm="create-monorepo.zsh"' >> ~/.zprofile && source ~/.zprofile
 ```
 
 ## Execute the script
@@ -73,7 +73,7 @@ cd ~/smerth/Developer/github-repositories/
 Call the script
 
 ```shell
-glym
+cm
 ```
 
 ## Steps covered

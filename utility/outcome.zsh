@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-SCRIPT_DIR=$(dirname "$0")
+script_dir=$(dirname "$0")
 
 # Colors
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $script_dir/../gum-ui/colors.zsh
 
 # Collect args
 exit_state=$1

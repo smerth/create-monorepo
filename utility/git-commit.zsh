@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-SCRIPT_DIR=$(dirname "$0")
+script_dir=$(dirname "$0")
 
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $script_dir/../gum-ui/colors.zsh
 
 MESSAGE=$1
 

@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-SCRIPT_DIR=$(dirname "$0")
+script_dir=$(dirname "$0")
 
 # Colors
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $script_dir/../gum-ui/colors.zsh
 
 # Banner
 gum style --border normal --margin "1" --padding "2 2" --border-foreground $WHITE "Add $(gum style --foreground $BLUE 'workspaces') key to $(gum style --foreground $BLUE 'package.json')."
@@ -29,4 +29,4 @@ else
 fi
 
 # Commit changes
-zsh $SCRIPT_DIR/git-commit.zsh "add workspaces key to package.json"
+zsh $script_dir/git-commit.zsh "add workspaces key to package.json"

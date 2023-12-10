@@ -1,16 +1,16 @@
 #!/bin/zsh
 
-SCRIPT_DIR=$(dirname "$0")
+script_dir=$(dirname "$0")
 
 # COLORS
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $script_dir/../gum-ui/colors.zsh
 
 if [ $# -eq 0 ]; then
-  echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to read NODE_VERSION."
+  echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to read node_versION."
   exit 1
 fi
 
-NODE_VERSION=$1
+node_versION=$1
 
 # Banner
 gum style --border normal --margin "1" --padding "2 2" --border-foreground $WHITE "Configure $(gum style --foreground $BLUE 'NVM')."
@@ -25,8 +25,8 @@ if [ ! -f .npmrc ]; then
 fi
 
 # Add node version to file
-if ! echo $NODE_VERSION >.nvmrc; then
-  echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to write NODE_VERSION to .nvmrc."
+if ! echo $node_versION >.nvmrc; then
+  echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to write node_versION to .nvmrc."
   exit 1
 fi
 
@@ -39,4 +39,4 @@ echo
 echo "$(gum style --foreground $GREEN "✓ Success!") .nvmrc has been added."
 
 # Commit changes
-zsh $SCRIPT_DIR/../steps/git-commit.zsh "add .nvmrc file with the project node version."
+zsh $script_dir/../steps/git-commit.zsh "add .nvmrc file with the project node version."

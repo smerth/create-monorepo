@@ -2,7 +2,7 @@
 
 # Colors
 # Because this file is sourced from main script the path is from the main script file
-source $SCRIPT_DIR/gum-ui/colors.zsh
+source $script_dir/gum-ui/colors.zsh
 
 # Banner
 gum style --border normal --margin "1" --padding "2 2" --border-foreground $WHITE "Gather some useful $(gum style --foreground $BLUE 'options')."
@@ -15,13 +15,13 @@ FILENAME="monorepo-options.json"
 
 # Ask for repository name
 echo "$(gum style --foreground $GREEN "?:") What is the name of the $(gum style --foreground $BLUE "repo") you just created?"
-REPO_NAME=$(gum input --placeholder "my-new-project")
+repo_NAME=$(gum input --placeholder "my-new-project")
 printf "$(gum style --foreground $BLUE "A: ")"
-printf "${REPO_NAME} \n"
+printf "${repo_NAME} \n"
 echo
 
 # CD into local repository folder
-if ! cd ./$REPO_NAME; then
+if ! cd ./$repo_NAME; then
     echo "$(gum style --foreground $ORANGE "X ERROR!") Unable to CD into the provided project folder."
     exit 1
 fi
@@ -35,13 +35,13 @@ echo
 
 # Ask for Node version of the project
 echo "$(gum style --foreground $GREEN "?:") What $(gum style --foreground $BLUE "Version of Node") will your monorepo use?"
-NODE_VERSION=$(gum input --placeholder "v18")
+node_versION=$(gum input --placeholder "v18")
 printf "$(gum style --foreground $BLUE "A: ")"
-printf "${NODE_VERSION} \n"
+printf "${node_versION} \n"
 echo
 
 # Create an array to hold package names
-PACKAGE_NAMES=()
+package_names=()
 
 # Create an array to hold apps
 APPS=()
@@ -65,7 +65,7 @@ while [[ "$CHOICE" == "Yes" ]]; do
     echo
 
     # Add package name to list of names
-    PACKAGE_NAMES+=("${NAMESPACED_PACKAGE_NAME}")
+    package_names+=("${NAMESPACED_PACKAGE_NAME}")
 
     # Ask for another package name
     echo "$(gum style --foreground $GREEN "?:") Do you want to add another $(gum style --foreground $BLUE "package") to this monorepo?"
@@ -91,7 +91,7 @@ while [[ "$INSTALL_APP" == "Yes" ]]; do
 
     # Ask for app type
     echo "$(gum style --foreground $GREEN "?:") What type of $(gum style --foreground $BLUE "app") do you want to add to this monorepo?"
-    APP_CHOICE=$(gum choose --item.foreground 250 "NEXT" "REMIX" "GATSBY" "EXPO")
+    APP_CHOICE=$(gum choose --item.foreground 250 "NEXT" "GATSBY" "EXPO")
 
     # Print answer
     printf "$(gum style --foreground $BLUE "A: ")"
@@ -114,7 +114,7 @@ while [[ "$INSTALL_APP" == "Yes" ]]; do
 done
 
 # JQ program to take a list of items and create a json array
-PACKAGES_ARRAY=$(jq -c -n '$ARGS.positional' --args "${PACKAGE_NAMES[@]}")
+PACKAGES_ARRAY=$(jq -c -n '$ARGS.positional' --args "${package_names[@]}")
 
 # JQ program to take a list of items and create a json array
 APPS_ARRAY=$(jq -c -n '$ARGS.positional' --args "${APPS[@]}")
@@ -122,9 +122,9 @@ APPS_ARRAY=$(jq -c -n '$ARGS.positional' --args "${APPS[@]}")
 # Create a new string with JQ
 JSON_STRING=$(
     jq -n \
-        --arg rn "$REPO_NAME" \
+        --arg rn "$repo_NAME" \
         --arg on "$ORG_NAME" \
-        --arg nv "$NODE_VERSION" \
+        --arg nv "$node_versION" \
         --argjson pk "$PACKAGES_ARRAY" \
         --argjson apps "$APPS_ARRAY" \
         '{"org_name": $on, "repo_name": $rn, "node_version": $nv, "packages": $pk, "apps": $apps}'
@@ -132,7 +132,7 @@ JSON_STRING=$(
 
 echo
 
-echo "$(gum style --foreground $GREEN "OK!") Let's convert the $(gum style --foreground $BLUE $REPO_NAME) repository into a $(gum style --foreground $BLUE "Lerna Yarn Monorepo") with these $(gum style --foreground $BLUE "options"):"
+echo "$(gum style --foreground $GREEN "OK!") Let's convert the $(gum style --foreground $BLUE $repo_NAME) repository into a $(gum style --foreground $BLUE "Lerna Yarn Monorepo") with these $(gum style --foreground $BLUE "options"):"
 
 echo
 
@@ -145,4 +145,4 @@ echo $JSON_STRING | jq . >$FILENAME
 
 # Commit changes
 # Because this file is sourced from main script the path is from the main script file
-zsh $SCRIPT_DIR/steps/git-commit.zsh "write responses to monorepo-option.json"
+zsh $script_dir/steps/git-commit.zsh "write responses to monorepo-option.json"

@@ -12,10 +12,10 @@ source $script_dir/../gum-ui/colors.zsh
 
 # Banner
 zsh $script_dir/../gum-ui/banner.zsh \
-    "Add $(gum style --foreground $BLUE "packages") to the monorepo."
+    "Add $(gum style --foreground $blue "packages") to the monorepo."
 
 # Description
-echo "Add $(gum style --foreground $BLUE "packages") using $(gum style --foreground $BLUE "'lerna create'")."
+echo "Add $(gum style --foreground $blue "packages") using $(gum style --foreground $blue "'lerna create'")."
 echo
 
 echo $package_names | jq -r '.[]' | while read i; do
@@ -29,5 +29,5 @@ echo $package_names | jq -r '.[]' | while read i; do
 done
 
 # Commit changes
-zsh $script_dir/git-commit.zsh \
+zsh $script_dir/../utility/git-commit.zsh \
     "add packages to the monorepo"

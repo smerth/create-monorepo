@@ -1,23 +1,23 @@
 #!/bin/zsh
 
-script_dir=$(dirname "$0")
+SCRIPT_DIR=$(dirname "$0")
 
 # Colors
-source $script_dir/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../gum-ui/colors.zsh
 
 # Collect args
-exit_state=$1
-error=$2
-success=$3
+EXIT_STATE=$1
+ERROR_MESSAGE=$2
+SUCCESS_MESSAGE=$3
 
 # Echo Outcome
-if [ $exit_state -ne 0 ]; then
+if [ $EXIT_STATE -ne 0 ]; then
     echo
-    echo "$(gum style --foreground $ORANGE "X ERROR!") $error"
+    echo "$(gum style --foreground $RED "X Oops") $ERROR_MESSAGE"
     echo
     exit 1
 else
     echo
-    echo "$(gum style --foreground $GREEN "✓ Success!") $success"
+    echo "$(gum style --foreground $GREEN "✓ Done") $SUCCESS_MESSAGE"
     echo
 fi

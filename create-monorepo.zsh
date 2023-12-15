@@ -1,64 +1,67 @@
 #!/bin/zsh
 
-script_dir=$(dirname "$0")
+SCRIPT_DIR=$(dirname "$0")
 
-# Create a repo
+source $SCRIPT_DIR/gum-ui/colors.zsh
+
+# Get options for creating a new Repo on Github and converting it to a Monorepo
+# N.B. sourcing this script means
+# its variables are available
+# throughout the rest of this script
+# source $SCRIPT_DIR/steps/0-get-options.zsh
+
+# Create a new remote repository and clone it locally
+# ***************************************************
+# gh repo create $REPO_NAME \
+#     --add-readme \
+#     --private \
+#     --clone \
+#     --description $REPO_DESCRIPTION \
+#     --gitignore "Node" \
+#     --license "MIT"
+
+# Change working Directory into new repo
+# **************************************
+# cd $REPO_NAME
+cd golden
+
+# print "this is NPMRC_CONFIG: $NPM_CONFIG"
+
+# Add nvmrc
+# *********
+# example of calling a script with named parameter
+# zsh $SCRIPT_DIR/2-add-nvmrc.zsh --node-version $NODE_VERSION
+
+# Add npmrc
+# *********
+# sourcing a script so the variables are all available
+# source $SCRIPT_DIR/3-add-npmrc.zsh
+
+# Initiate yarn
 # *************
-# Use the GH CLI to create a repo on GitHub
-# Clone the repo to the working directory
-source $script_dir/steps/0-create-repo.zsh
+zsh $SCRIPT_DIR/4-run-yarn-init.zsh
 
-# Get user input
-# **************
-# Source questions so the working directory remains
-# in repository after questions run
-# TODO: refactor to remove the use of an options file
-source $script_dir/steps/1-questions.zsh
+exit 1
 
-# Retrieve answers from the monorepo-options.json file
-# ****************************************************
-github_org=$(cat monorepo-options.json | jq .org_name)
-repo=$(cat monorepo-options.json | jq .repo_name)
-node_vers=$(cat monorepo-options.json | jq -r .node_version)
-package_names=$(cat monorepo-options.json | jq .packages)
-applications=$(cat monorepo-options.json | jq -r .apps)
+# Add workspaces to package.json
+# ******************************
+zsh $SCRIPT_DIR/5-add-workspaces-key.zsh
 
-# ADD NVMRC
+# Install and initialize lerna
+# ****************************
+zsh $SCRIPT_DIR/6-run-lerna-init.zsh
 
-zsh $script_dir/steps/2-add-nvmrc.zsh "$node_vers"
+# Add publish config to lerna
+# ***************************
+zsh $SCRIPT_DIR/7-add-lerna-publish-config.zsh
 
-# INITIATE YARN PROJECT
-zsh $script_dir/steps/3-add-npmrc.zsh
+# Add packages
+# ************
+if (($(echo $package_names | jq " . | length") != 0)); then zsh $SCRIPT_DIR/steps/8-add-packages.zsh "$package_names"; fi
 
-# INITIATE YARN PROJECT
-zsh $script_dir/steps/4-run-yarn-init.zsh
+# Add apps
+# ********
+if (($(echo $applications | jq " . | length") != 0)); then zsh $SCRIPT_DIR/steps/9-add-apps.zsh $applications; fi
 
-# ADD WORKSPACES KEY TO PACKAGE.JSON
-zsh $script_dir/steps/5-add-workspaces-key.zsh
-
-# INSTALL AND INITIALIZE LERNA
-zsh $script_dir/steps/6-run-lerna-init.zsh
-
-# ADD PUBLISH CONFIG TO LERNA.JSON
-zsh $script_dir/steps/7-add-lerna-publish-config.zsh
-
-# ADD PACKAGES
-# TODO: only install packages if package_names array contains names
-# echo $package_names | jq length
-zsh $script_dir/steps/8-add-packages.zsh "$package_names"
-
-# ADD APPS
-# TODO: only install apps if apps array contains type
-# echo $applications | jq length
-zsh $script_dir/steps/9-add-apps.zsh $applications
-
-# lerna clean removes all node_modules from packages (but does it remove from apps?)
-lerna clean --yes
-
-# Remove all node_module folders
-find . \( -name "node_modules" \) -exec rm -rf -- {} +s
-
-# Reinstall everything with yarn
-yarn
-
-# TODO: Add npmrc with config for publishing to private repos
+# Reinstall dependancies
+# **********************

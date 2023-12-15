@@ -1,16 +1,20 @@
 #!/bin/zsh
 
-script_dir=$(dirname "$0")
+SCRIPT_DIR=$(dirname "$0")
 
 # Collect args
 TEXT=("$@")
 
 # Colors
-source $script_dir/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../gum-ui/colors.zsh
 
 gum style \
+    --background $BLACK \
+    --foreground $WHITE \
     --border normal \
-    --margin "1" \
-    --padding "2 2" \
     --border-foreground $WHITE \
+    --border-background $BLACK \
+    --width 64 \
+    --margin "1" \
+    --padding "1 1" \
     $TEXT

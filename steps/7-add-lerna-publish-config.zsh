@@ -6,10 +6,10 @@ script_dir=$(dirname "$0")
 source $script_dir/../gum-ui/colors.zsh
 
 # Banner
-gum style --border normal --margin "1" --padding "2 2" --border-foreground $WHITE "Add $(gum style --foreground $BLUE "publishing config") for Lerna."
+gum style --border normal --margin "1" --padding "2 2" --border-foreground $white "Add $(gum style --foreground $blue "publishing config") for Lerna."
 
 # Description
-echo "Add the following publish config object to $(gum style --foreground $BLUE "'.command'") key in $(gum style --foreground $BLUE "lerna.json")"
+echo "Add the following publish config object to $(gum style --foreground $blue "'.command'") key in $(gum style --foreground $blue "lerna.json")"
 echo
 
 # store multi line text to variable
@@ -38,4 +38,5 @@ zsh $script_dir/../utility/outcome.zsh "$?" "There was a problem adding the publ
 cat lerna.json | jq .
 
 # Commit changes
-zsh $script_dir/git-commit.zsh "add publish config object to .command key in lerna.json"
+zsh $script_dir/../utility/git-commit.zsh \
+  "add publish config object to .command key in lerna.json"

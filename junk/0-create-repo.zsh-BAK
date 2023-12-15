@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+script_dir=$(dirname "$0")
+
+# Colors
+source $script_dir/../gum-ui/colors.zsh
+
+clear
+
+# Intro
+zsh $script_dir/../gum-ui/banner.zsh \
+    "Create a repository on GitHub" \
+    "      " \
+    "We'll call GitHub's GH CLI to create a new repo on GitHub." \
+    "Say 'yes' to cloning the repository."
+
+# Create a repository on GitHub
+# gh repo create
+
+# Report Outcome
+# zsh $script_dir/../utility/outcome.zsh "$?" \
+#     "There was a problem completing the GH create routine" \
+#     "Repository created and cloned"
+
+# create a new remote repository and clone it locally
+gh repo create my-project --public --clone
+
+# Report Outcome
+zsh $script_dir/../utility/outcome.zsh "$?" \
+    "There was a problem completing the GH create routine" \
+    "Repository created and cloned"
+
+exit 1

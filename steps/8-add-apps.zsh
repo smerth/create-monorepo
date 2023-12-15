@@ -9,7 +9,7 @@ source $script_dir/../gum-ui/colors.zsh
 
 # Banner
 zsh $script_dir/../gum-ui/banner.zsh \
-    "Add $(gum style --foreground $BLUE "apps") to the monorepo."
+    "Add $(gum style --foreground $blue "apps") to the monorepo."
 
 # Description
 echo "Call the install CLI for each of the previously specified apps."
@@ -70,14 +70,14 @@ for row in $(echo "${applications}" | jq -r '.[]'); do
     if [ $row = "NEXT" ]; then
         # Banner
         zsh $script_dir/../gum-ui/banner.zsh \
-            "Add a $(gum style --foreground $BLUE "NEXT") app to the monorepo."
+            "Add a $(gum style --foreground $blue "NEXT") app to the monorepo."
         # This seems to work fine
         yarn create next-app
     fi
     if [ $row = "GATSBY" ]; then
         # Banner
         zsh $script_dir/../gum-ui/banner.zsh \
-            "Add a $(gum style --foreground $BLUE "GATSBY") app to the monorepo."
+            "Add a $(gum style --foreground $blue "GATSBY") app to the monorepo."
         # This creates a yarn install in my environment
         # But not all?
         npx gatsby options set package-manager yarn
@@ -86,7 +86,7 @@ for row in $(echo "${applications}" | jq -r '.[]'); do
     if [ $row = "EXPO" ]; then
         # Banner
         zsh $script_dir/../gum-ui/banner.zsh \
-            "Add a $(gum style --foreground $BLUE "EXPO") app to the monorepo."
+            "Add a $(gum style --foreground $blue "EXPO") app to the monorepo."
         # TODO: test this create function
         # npx installs with npm not yarn
         # npx create-expo-app
@@ -99,5 +99,5 @@ done
 find . \( -name ".git" -o -name ".gitignore" -o -name ".gitmodules" -o -name ".gitattributes" \) -exec rm -rf -- {} +
 
 # Commit changes
-zsh $script_dir/git-commit.zsh \
+zsh $script_dir/../utility/git-commit.zsh \
     "add apps to the monorepo"

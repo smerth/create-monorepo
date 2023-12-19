@@ -38,7 +38,7 @@ read -r -d '' NPMRC_CONFIG <<EOM
 @${GITHUB_ORG}:registry=https://npm.pkg.github.com
 EOM
 
-# ...do something interesting...
+# Use npm config from options file if present
 if [ "$NO_OPTION_FILE" = true ]; then
     # print "Not using an options file"
     print $NPMRC_CONFIG >.npmrc

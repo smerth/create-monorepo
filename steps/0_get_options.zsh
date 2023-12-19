@@ -12,6 +12,8 @@ zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
     "Get Monorepo Configuration Options"
 
 if [[ $1 =~ ^(-of|--options-file) ]]; then
+    print "$(gum style --foreground $BLUE "i INFO") Reading monorepo config from options file."
+
     OPTIONS_FILE="$2"
 
     GITHUB_ORG=$(cat ./$OPTIONS_FILE | jq -r '."github-org"')
@@ -22,9 +24,9 @@ if [[ $1 =~ ^(-of|--options-file) ]]; then
     APPS=$(cat ./$OPTIONS_FILE | jq -r '."apps"')
     NPM_CONFIG=$(cat ./$OPTIONS_FILE | jq -r '."npmrc-config"')
 
-    print "Your monorepo will be scafolded with the following options: "
-    print "   "
-    cat ./$OPTIONS_FILE | jq .
+    # print "Your monorepo will be scafolded with the following options: "
+    # print "   "
+    # cat ./$OPTIONS_FILE | jq .
 
 else
     NO_OPTION_FILE=true

@@ -5,10 +5,10 @@ SCRIPT_DIR=$(dirname "$0")
 
 # Colors
 # Don't need to source colors since this scirpt is being sourced itself
-# source $SCRIPT_DIR/../gum-ui/colors.zsh
+# source $SCRIPT_DIR/../utility/colors.zsh
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
     "Get Monorepo Configuration Options"
 
 if [[ $1 =~ ^(-of|--options-file) ]]; then
@@ -82,7 +82,7 @@ else
     # Add apps to the monorepo
 
     # Create an array to hold applications
-    APPLICATIONS=()
+    APPS=()
 
     INSTALL_APPS_CHOICE_HEADER="$(gum style --foreground $GREEN "?:") Do you want to add an $(gum style --foreground $BLUE "app") to this monorepo? : "
     INSTALL_APP_CHOICE=$(gum choose --header $INSTALL_APPS_CHOICE_HEADER --item.foreground 250 "Yes" "No")
@@ -94,7 +94,7 @@ else
         print "$APP_CHOICE_HEADER $APP_CHOICE"
 
         # Add app type name to list of app types
-        APPLICATIONS+=("${APP_CHOICE}")
+        APPS+=("${APP_CHOICE}")
 
         # Ask for another app
         INSTALL_ANOTHER_APP_CHOICE_HEADER="$(gum style --foreground $GREEN "?:") Do you want to add another $(gum style --foreground $BLUE "app") to this monorepo?"

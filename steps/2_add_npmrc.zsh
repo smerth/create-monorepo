@@ -4,10 +4,10 @@ SCRIPT_DIR=$(dirname "$0")
 
 # COLORS
 # Don't need to source colors since this script is being sourced, not executed
-# source $SCRIPT_DIR/../gum-ui/colors.zsh
+# source $SCRIPT_DIR/../utility/colors.zsh
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
     "Add .npmrc with package registry config"
 
 # add .npmrc to .gitignore to exclude from .npmrc git tracking
@@ -68,5 +68,5 @@ else
 fi
 
 # Commit changes
-zsh $SCRIPT_DIR/../utility/git-commit.zsh \
+zsh $SCRIPT_DIR/../utility/git_commit.zsh \
     "add .npmrc file with config for GitHub Package Registry."

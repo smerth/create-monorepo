@@ -6,7 +6,7 @@ SCRIPT_DIR=$(dirname "$0")
 TEXT=("$@")
 
 # Colors
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../utility/colors.zsh
 
 gum style \
     --background $BLACK \

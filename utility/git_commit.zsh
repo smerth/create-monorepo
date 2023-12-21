@@ -2,13 +2,13 @@
 
 SCRIPT_DIR=$(dirname "$0")
 
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../utility/colors.zsh
 
 MESSAGE=$1
 
 # Intro
 print "$(gum style --foreground $BLUE "* Commit changes to GitHub")"
-# zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+# zsh $SCRIPT_DIR/../utility/banner.zsh \
 #     "Commit changes to GitHub"
 
 # Banner

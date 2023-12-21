@@ -6,10 +6,10 @@
 SCRIPT_DIR=$(dirname "$0")
 
 # Colors
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../utility/colors.zsh
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
     "Initiate npm project using $(gum style --foreground $BLUE 'yarn')."
 
 # Reload .zshrc to load correct Node version
@@ -35,5 +35,5 @@ zsh $SCRIPT_DIR/../utility/outcome.zsh "$?" \
     "Description added to package.json."
 
 # Commit changes
-zsh $SCRIPT_DIR/../utility/git-commit.zsh \
+zsh $SCRIPT_DIR/../utility/git_commit.zsh \
     "initiate npm with yarn."

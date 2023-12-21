@@ -12,13 +12,15 @@ function add_apps_to_workspaces_array() {
     else
         # Make a temporary file
         tmpfile=$(mktemp)
+
         # append the apps/* string to the workspaces array in package.json
-        jq --arg newstr "apps/*" '.workspaces += [$newstr]' $PACKAGE_JSON \
-            >$tmpfile && mv $tmpfile $PACKAGE_JSON && rm -f "$tmpfile"
+        jq --arg newstr "apps/*" '.workspaces += [$newstr]' $PACKAGE_JSON >$tmpfile
+        mv $tmpfile $PACKAGE_JSON
+        rm -f "$tmpfile"
+
         # Report outcome
-        zsh $SCRIPT_DIR/../utility/outcome.zsh \
-            "$?" \
-            "There was a problem adding "apps/*" string to the workspaces array" \
-            "The "apps/*" string has been added to the workspaces array"
+        # zsh $SCRIPT_DIR/../utility/outcome.zsh "$?" \
+        #     "There was a problem adding "apps/*" string to the workspaces array" \
+        #     "The "apps/*" string has been added to the workspaces array"
     fi
 }

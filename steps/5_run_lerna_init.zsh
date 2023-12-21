@@ -3,10 +3,10 @@
 SCRIPT_DIR=$(dirname "$0")
 
 # COLORS
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../utility/colors.zsh
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
     "Install and initialize $(gum style --foreground $BLUE "Lerna")."
 
 # Reload .zshrc to load correct Node version
@@ -29,5 +29,5 @@ zsh $SCRIPT_DIR/../utility/outcome.zsh "$?" \
     "lerna has been initiated with the packages flag."
 
 # Commit changes
-zsh $SCRIPT_DIR/../utility/git-commit.zsh \
+zsh $SCRIPT_DIR/../utility/git_commit.zsh \
     "install and configure Lerna"

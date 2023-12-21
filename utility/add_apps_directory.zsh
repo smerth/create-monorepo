@@ -8,11 +8,11 @@ function add_apps_directory() {
         zsh $SCRIPT_DIR/../utility/outcome.zsh \
             "$?" \
             "There was a problem adding the apps directory!" \
-            "The apps folder has been added to the monorepo."
+            "The apps dirctory has been added to the monorepo."
     else
         echo "The apps directory already exists."
         echo
     fi
     cd apps
-    pwd
+    # pwd
 }

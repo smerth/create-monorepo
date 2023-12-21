@@ -7,7 +7,7 @@ SCRIPT_DIR=$(dirname "$0")
 # https://www.npmjs.com/package/@lerna/create
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
     "Add $(gum style --foreground $BLUE "packages") to the monorepo."
 
 # Add packages
@@ -48,5 +48,5 @@ else
 fi
 
 # Commit changes
-zsh $SCRIPT_DIR/../utility/git-commit.zsh \
+zsh $SCRIPT_DIR/../utility/git_commit.zsh \
     "add packages to the monorepo"

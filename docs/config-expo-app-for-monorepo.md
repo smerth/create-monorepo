@@ -1,36 +1,30 @@
 # Changes to Expo App to make it work with monorepo
 
+Reference: https://docs.expo.dev/guides/monorepos/
 
+To configure Expo to work in a monorepo make the following changes:
 
-https://docs.expo.dev/guides/monorepos/
+@ [my-expo-app]/package.json
 
-
-
-
-
-@ package.json
+from
 
 ```shell
   "main": "node_modules/expo/AppEntry.js",
 ```
 
-to 
+to
 
 ```shell
   "main": "index.js",
 ```
 
-
-
-Create index.js @ app root
+Create [my-expo-app]/index.js
 
 ```shell
 touch index.js
 ```
 
-
-
-@ app root `metro.config.js`
+@ [my-expo-app]/metro.config.js
 
 ```js
 const { getDefaultConfig } = require("expo/metro-config");
@@ -56,15 +50,7 @@ config.resolver.disableHierarchicalLookup = true;
 module.exports = config;
 ```
 
-
-
-
-
-
-
-
-
-@ index.js add 
+@ index.js add
 
 ```js
 import { registerRootComponent } from "expo";
@@ -75,6 +61,4 @@ import App from "./App";
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately
 registerRootComponent(App);
-
 ```
-

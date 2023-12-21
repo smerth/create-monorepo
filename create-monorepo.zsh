@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=$(dirname "$0")
 
-source $SCRIPT_DIR/gum-ui/colors.zsh
+source $SCRIPT_DIR/utility/colors.zsh
 
 # Get options for creating a new Repo on Github and converting it to a Monorepo
 # N.B. sourcing this script means:
@@ -58,5 +58,8 @@ source $SCRIPT_DIR/7_add_packages.zsh
 # ********
 source $SCRIPT_DIR/8_add_apps.zsh
 
-# Reinstall dependancies
-# source $SCRIPT_DIR/9-remove-git-sub-modules.zsh
+# Remove git sub-modules
+source $SCRIPT_DIR/9_remove_git_sub_modules.zsh
+
+# Post run notice
+source $SCRIPT_DIR/10_post_run_notice.zsh

@@ -3,10 +3,10 @@
 SCRIPT_DIR=$(dirname "$0")
 
 # Colors
-source $SCRIPT_DIR/../gum-ui/colors.zsh
+source $SCRIPT_DIR/../utility/colors.zsh
 
 # Intro
-zsh $SCRIPT_DIR/../gum-ui/banner.zsh \
+zsh $SCRIPT_DIR/../utility/banner.zsh \
   "Add an ".nvmrc" file with the Node version for this project."
 
 if [[ $1 =~ ^(-nv|--node-version) ]]; then
@@ -35,5 +35,5 @@ else
 fi
 
 # Commit changes
-zsh $SCRIPT_DIR/../utility/git-commit.zsh \
+zsh $SCRIPT_DIR/../utility/git_commit.zsh \
   "add .nvmrc file with the project node version."

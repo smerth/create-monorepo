@@ -1,6 +1,6 @@
 # create-monorepo
 
-Generate Lerna Yarn Monorepo with packages and apps
+A Shell CLI to create a Node/Lerna monorepo with any number of packages and any number of Nextjs, Gatsby or Expo apps. 
 
 ## Intoduction
 
